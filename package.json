@@ -1,0 +1,21 @@
+{
+  "name": "furstation-back",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11"
+  },
+  "devDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.py": [
+      "black",
+      "flake8"
+    ]
+  }
+}
