@@ -3,10 +3,12 @@
 ## Requirements
 - docker
 - docker-compose
+- node
 - pip
 
 ## Build
 ```
+npm install
 pip install -r requirements.txt
 docker-compose up -d
 ```
