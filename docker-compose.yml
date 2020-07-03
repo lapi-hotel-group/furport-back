@@ -12,28 +12,13 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
     restart: always
-  app:
+  django:
     build:
       context: .
-      dockerfile: ./docker/app/Dockerfile
-    command: uwsgi --ini docker/app/uwsgi.ini
-    volumes:
-      - .:/code
-      - django-socket:/home/socket
-    restart: always
-    depends_on:
-      - postgres
-  nginx:
-    build: ./docker/nginx
-    volumes:
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./docker/nginx/uwsgi_params:/home/uwsgi_params
-      - django-socket:/home/socket
-      - .:/code
-    restart: always
+      dockerfile: ./docker/django/Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
     ports:
       - 8080:8000
-    depends_on:
-      - app
-volumes:
-  django-socket:
+    volumes:
+      - .:/code
+    restart: always
