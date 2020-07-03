@@ -15,8 +15,8 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./docker/uwsgi/Dockerfile
-    command: uwsgi --ini docker/uwsgi/uwsgi.ini
+      dockerfile: ./docker/app/Dockerfile
+    command: uwsgi --ini docker/app/uwsgi.ini
     volumes:
       - .:/code
       - django-socket:/home/socket
