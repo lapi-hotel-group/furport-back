@@ -25,7 +25,7 @@ SECRET_KEY = "flc$6u%7)uc9mt6c*_0u_bzw(olsj@k$ue=1sxc77f3_5)b)9j"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["api.furport.tk"]
+ALLOWED_HOSTS = ["localhost", "api.furport.tk"]
 
 
 # Application definition
