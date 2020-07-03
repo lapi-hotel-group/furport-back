@@ -15,7 +15,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: ssh and git pull and docker-compose up
-        run: ssh -i key -oStrictHostKeyChecking=no -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST} "cd ~/furport-back/ && git pull && cd ~/furport-infra/ && docker-compose up -d --build"
+        run: ssh -i key -oStrictHostKeyChecking=no -p ${SSH_PORT} ${SSH_USER}@${SSH_HOST} "cd ~/furport-back/ && git pull && cd ~/furport-infra/ && docker-compose up -d --build && docker-compose exec -T app python manage.py migrate && docker-compose exec -T app python manage.py collectstatic"
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
