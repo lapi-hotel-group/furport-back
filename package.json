@@ -14,7 +14,8 @@
   },
   "lint-staged": {
     "*.py": [
-      "black"
+      "black",
+      "flake8"
     ]
   }
 }
