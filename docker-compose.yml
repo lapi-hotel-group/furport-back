@@ -1,0 +1,24 @@
+version: "3"
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: ./docker/postgres/Dockerfile
+    volumes:
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+      - ./docker/postgres/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: password
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+    restart: always
+  django:
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8080:8000
+    volumes:
+      - .:/code
+    restart: always
