@@ -2,3 +2,4 @@ Django
 psycopg2
 uwsgi
 djangorestframework
+djangorestframework-jwt
