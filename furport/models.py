@@ -11,6 +11,9 @@ class Tag(models.Model):
     class Meta:
         ordering = ("name",)
 
+    def __str__(self):
+        return self.name
+
 
 class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -29,3 +32,6 @@ class Event(models.Model):
             "start_datetime",
             "end_datetime",
         )
+
+    def __str__(self):
+        return self.name
