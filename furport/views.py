@@ -1,21 +1,28 @@
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
-from furport.serializers import UserSerializer, GroupSerializer
+from rest_framework import permissions, renderers, viewsets
+from rest_framework.decorators import action
+
+from furport.models import Event, Tag
+from furport.serializers import (
+    EventSerializer,
+    TagSerializer,
+)
+from furport.permissions import IsOwnerOrReadOnly
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
+class EventViewSet(viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerOrReadOnly,
+    )
 
-    queryset = User.objects.all().order_by("-date_joined")
-    serializer_class = UserSerializer
+    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
