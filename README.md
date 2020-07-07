@@ -23,7 +23,7 @@ access http://localhost:8080
 ## `manage.py` のコマンドをやるためにコンテナに入る
 
 ```
-docker-compose exec app bash
+docker-compose exec django bash
 # python manage.py migrate
 # python manage.py collectstatic
 ```
