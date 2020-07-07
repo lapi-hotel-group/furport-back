@@ -43,12 +43,14 @@ INSTALLED_APPS = [
     "allauth.account",
     "rest_auth",
     "rest_auth.registration",
+    "corsheaders",
     "furport",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -142,3 +144,8 @@ REST_USE_JWT = True
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "tmp/email")
+
+CORS_ORIGIN_WHITELIST = [
+    "https://www.furport.tk",
+    "http://localhost:3000",
+]
