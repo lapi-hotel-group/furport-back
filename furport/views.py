@@ -1,4 +1,4 @@
-from rest_framework import permissions, renderers, viewsets
+from rest_framework import permissions, renderers, viewsets, mixins
 from rest_framework.decorators import action
 
 from furport.models import Event, Tag
@@ -17,7 +17,7 @@ class EventViewSet(viewsets.ModelViewSet):
         IsOwnerOrReadOnly,
     )
 
-    @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
+    @action(detail=False, methods=["post"])
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
 
