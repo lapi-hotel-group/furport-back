@@ -4,6 +4,12 @@ from django.contrib.auth.models import User
 from furport.models import Event, Tag
 
 
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ["url", "username"]
+
+
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     created_by = serializers.ReadOnlyField(source="created_by.username")
     id = serializers.ReadOnlyField()
