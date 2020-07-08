@@ -4,3 +4,4 @@ uwsgi
 djangorestframework
 djangorestframework-jwt
 django-rest-auth[with_social]
+django-cors-headers
