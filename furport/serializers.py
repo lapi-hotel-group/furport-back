@@ -6,6 +6,7 @@ from furport.models import Event, Tag
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     created_by = serializers.ReadOnlyField(source="created_by.username")
+    id = serializers.ReadOnlyField()
 
     class Meta:
         model = Event
@@ -14,6 +15,8 @@ class EventSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.ReadOnlyField()
+
     class Meta:
         model = Tag
         fields = "__all__"
