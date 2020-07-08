@@ -39,6 +39,10 @@ class Event(models.Model):
     url = models.CharField("URL", max_length=255, blank=True, default="")
     twitter_id = models.CharField("TwitterId", max_length=255, blank=True, default="")
     description = models.TextField("詳細", blank=True, default="")
+    country = models.CharField("国名", max_length=255, blank=False, default="")
+    state = models.CharField("都道府県・州名", max_length=255, blank=False, default="")
+    city = models.CharField("市名", max_length=255, blank=True, default="")
+    place = models.CharField("会場名", max_length=255, blank=True, default="")
     tag = models.ManyToManyField(Tag, blank=True)
     created_by = models.ForeignKey(
         "auth.User", on_delete=models.CASCADE, related_name="created_by"
