@@ -2,13 +2,14 @@ from rest_framework import permissions, renderers, viewsets, mixins
 from rest_framework.decorators import action
 from django.contrib.auth.models import User
 
-from furport.models import Event, Tag
+from furport.models import Event, Tag, Profile
 from furport.serializers import (
     EventSerializer,
     TagSerializer,
     UserSerializer,
+    ProfileSerializer,
 )
-from furport.permissions import IsOwnerOrReadOnly
+from furport.permissions import IsOwnerOrReadOnly, IsUserOrReadOnly
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -18,6 +19,15 @@ class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all().order_by("-date_joined")
     serializer_class = UserSerializer
+
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = (
+        permissions.IsAuthenticatedOrReadOnly,
+        IsUserOrReadOnly,
+    )
 
 
 class EventViewSet(viewsets.ModelViewSet):
