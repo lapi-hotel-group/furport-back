@@ -47,9 +47,6 @@ class Event(models.Model):
     created_by = models.ForeignKey(
         "auth.User", on_delete=models.CASCADE, related_name="created_by"
     )
-    stared_by = models.ManyToManyField(
-        "auth.User", blank=True, related_name="stared_by"
-    )
 
     class Meta:
         ordering = (
@@ -59,3 +56,18 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(
+        "auth.User", on_delete=models.CASCADE, primary_key=True,
+    )
+    star = models.ManyToManyField(Event, blank=True)
+    location = models.CharField("場所", max_length=255, blank=True, default="")
+    description = models.TextField("詳細", blank=True, default="")
+
+    class Meta:
+        ordering = ("user",)
+
+    def __str__(self):
+        return "%s profile" % self.username
