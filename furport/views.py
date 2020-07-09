@@ -15,9 +15,15 @@ from furport.serializers import (
 from furport.permissions import IsOwnerOrReadOnly, IsUserOrReadOnly, ReadOnly
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
     queryset = User.objects.all().order_by("-date_joined")
     serializer_class = UserSerializer
+    permission_classes = (permissions.AllowAny,)
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
