@@ -6,8 +6,9 @@ from furport import views
 
 router = routers.DefaultRouter()
 router.register(r"events", views.EventViewSet)
-router.register(r"tags", views.TagViewSet)
-router.register(r"tag_groups", views.TagGroupViewSet)
+router.register(r"general_tags", views.GeneralTagViewSet)
+router.register(r"character_tags", views.CharacterTagViewSet)
+router.register(r"organization_tags", views.OrganizationTagViewSet)
 router.register(r"users", views.UserViewSet)
 router.register(r"profiles", views.ProfileViewSet)
 
