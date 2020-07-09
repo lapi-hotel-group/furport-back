@@ -54,6 +54,8 @@ class OrganizationTagSerializer(serializers.HyperlinkedModelSerializer):
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     created_by = serializers.ReadOnlyField(source="created_by.username")
     id = serializers.ReadOnlyField()
+    stars = serializers.IntegerField(required=False)
+    attends = serializers.IntegerField(required=False)
 
     class Meta:
         model = Event

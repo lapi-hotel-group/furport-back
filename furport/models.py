@@ -74,7 +74,8 @@ class Profile(models.Model):
     user = models.OneToOneField(
         "auth.User", on_delete=models.CASCADE, primary_key=True,
     )
-    star = models.ManyToManyField(Event, blank=True)
+    star = models.ManyToManyField(Event, blank=True, related_name="star")
+    attend = models.ManyToManyField(Event, blank=True, related_name="attend")
     location = models.CharField("場所", max_length=255, blank=True, default="")
     description = models.TextField("詳細", blank=True, default="")
 

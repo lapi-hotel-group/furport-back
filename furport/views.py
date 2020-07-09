@@ -1,3 +1,4 @@
+from django.db import models
 from rest_framework import permissions, renderers, viewsets, mixins
 from rest_framework.decorators import action
 from django.contrib.auth.models import User
@@ -29,7 +30,9 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
 
 class EventViewSet(viewsets.ModelViewSet):
-    queryset = Event.objects.all()
+    queryset = Event.objects.annotate(
+        stars=models.Count("star"), attends=models.Count("attend")
+    )
     serializer_class = EventSerializer
     permission_classes = (
         permissions.IsAuthenticatedOrReadOnly,
