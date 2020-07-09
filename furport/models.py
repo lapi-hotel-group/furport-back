@@ -1,12 +1,10 @@
 from django.db import models
 
 
-class TagGroup(models.Model):
+class GeneralTag(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    name = models.CharField("タググループ名", max_length=255, blank=False, default="")
-    color = models.CharField("タグ色", max_length=255, blank=False, default="")
-    priority = models.IntegerField("優先度", blank=False, default=0)
+    name = models.CharField("タグ名", max_length=255, blank=False, default="")
     description = models.TextField("詳細", blank=True, default="")
 
     class Meta:
@@ -16,11 +14,23 @@ class TagGroup(models.Model):
         return self.name
 
 
-class Tag(models.Model):
+class CharacterTag(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     name = models.CharField("タグ名", max_length=255, blank=False, default="")
-    group = models.ForeignKey(TagGroup, on_delete=models.CASCADE)
+    description = models.TextField("詳細", blank=True, default="")
+
+    class Meta:
+        ordering = ("name",)
+
+    def __str__(self):
+        return self.name
+
+
+class OrganizationTag(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    name = models.CharField("タグ名", max_length=255, blank=False, default="")
     description = models.TextField("詳細", blank=True, default="")
 
     class Meta:
@@ -43,7 +53,9 @@ class Event(models.Model):
     state = models.CharField("都道府県・州名", max_length=255, blank=False, default="")
     city = models.CharField("市名", max_length=255, blank=True, default="")
     place = models.CharField("会場名", max_length=255, blank=True, default="")
-    tag = models.ManyToManyField(Tag, blank=True)
+    general_tag = models.ManyToManyField(GeneralTag, blank=True)
+    character_tag = models.ManyToManyField(CharacterTag, blank=True)
+    organization_tag = models.ManyToManyField(OrganizationTag, blank=True)
     created_by = models.ForeignKey(
         "auth.User", on_delete=models.CASCADE, related_name="created_by"
     )
