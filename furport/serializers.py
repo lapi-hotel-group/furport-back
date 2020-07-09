@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User, Permission
 
-from furport.models import Event, Tag, TagGroup, Profile
+from furport.models import Event, GeneralTag, OrganizationTag, CharacterTag, Profile
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -16,20 +16,29 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class TagSerializer(serializers.HyperlinkedModelSerializer):
+class GeneralTagSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.ReadOnlyField()
 
     class Meta:
-        model = Tag
+        model = GeneralTag
         fields = "__all__"
         read_only_fields = ("created_at", "updated_at")
 
 
-class TagGroupSerializer(serializers.HyperlinkedModelSerializer):
+class CharacterTagSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.ReadOnlyField()
 
     class Meta:
-        model = TagGroup
+        model = CharacterTag
+        fields = "__all__"
+        read_only_fields = ("created_at", "updated_at")
+
+
+class OrganizationTagSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.ReadOnlyField()
+
+    class Meta:
+        model = OrganizationTag
         fields = "__all__"
         read_only_fields = ("created_at", "updated_at")
 
