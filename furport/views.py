@@ -2,13 +2,14 @@ from rest_framework import permissions, renderers, viewsets, mixins
 from rest_framework.decorators import action
 from django.contrib.auth.models import User
 
-from furport.models import Event, Tag, TagGroup, Profile
+from furport.models import Event, GeneralTag, CharacterTag, OrganizationTag, Profile
 from furport.serializers import (
     EventSerializer,
-    TagSerializer,
     UserSerializer,
     ProfileSerializer,
-    TagGroupSerializer,
+    GeneralTagSerializer,
+    CharacterTagSerializer,
+    OrganizationTagSerializer,
 )
 from furport.permissions import IsOwnerOrReadOnly, IsUserOrReadOnly, ReadOnly
 
@@ -44,13 +45,19 @@ class EventViewSet(viewsets.ModelViewSet):
         serializer.save(created_by=self.request.user)
 
 
-class TagViewSet(viewsets.ModelViewSet):
-    queryset = Tag.objects.all()
-    serializer_class = TagSerializer
+class GeneralTagViewSet(viewsets.ModelViewSet):
+    queryset = GeneralTag.objects.all()
+    serializer_class = GeneralTagSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class TagGroupViewSet(viewsets.ModelViewSet):
-    queryset = TagGroup.objects.all()
-    serializer_class = TagGroupSerializer
-    permission_classes = (ReadOnly,)
+class CharacterTagViewSet(viewsets.ModelViewSet):
+    queryset = CharacterTag.objects.all()
+    serializer_class = CharacterTagSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
+class OrganizationTagViewSet(viewsets.ModelViewSet):
+    queryset = OrganizationTag.objects.all()
+    serializer_class = OrganizationTagSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
