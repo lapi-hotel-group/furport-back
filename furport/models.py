@@ -53,6 +53,12 @@ class Event(models.Model):
     state = models.CharField("都道府県・州名", max_length=255, blank=False, default="")
     city = models.CharField("市名", max_length=255, blank=True, default="")
     place = models.CharField("会場名", max_length=255, blank=True, default="")
+    google_map_description = models.CharField(
+        "グーグルマップ位置情報ワード", max_length=255, blank=True, default=""
+    )
+    google_map_place_id = models.CharField(
+        "グーグルマップ位置情報id", max_length=255, blank=True, default=""
+    )
     general_tag = models.ManyToManyField(GeneralTag, blank=True)
     character_tag = models.ManyToManyField(CharacterTag, blank=True)
     organization_tag = models.ManyToManyField(OrganizationTag, blank=True)
