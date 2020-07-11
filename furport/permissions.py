@@ -1,4 +1,5 @@
 from rest_framework import permissions
+from furport.models import Profile
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -10,6 +11,9 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         # Read permissions are allowed to any request,
         # so we'll always allow GET, HEAD or OPTIONS requests.
         if request.method in permissions.SAFE_METHODS:
+            return True
+
+        if Profile.objects.get(user=request.user).is_moderator:
             return True
 
         # Write permissions are only allowed to the owner of the snippet.
