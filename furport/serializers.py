@@ -21,7 +21,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = "__all__"
+        fields = ("user", "location", "description", "star", "attend")
 
 
 class GeneralTagSerializer(serializers.HyperlinkedModelSerializer):
