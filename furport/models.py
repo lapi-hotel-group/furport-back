@@ -59,6 +59,9 @@ class Event(models.Model):
     google_map_place_id = models.CharField(
         "グーグルマップ位置情報id", max_length=255, blank=True, default=""
     )
+    attendees = models.IntegerField("参加者数", blank=True, default=0)
+    openness = models.IntegerField("公開度", blank=True, default=0)
+    search_keywords = models.TextField("検索キーワード", blank=True, default="")
     general_tag = models.ManyToManyField(GeneralTag, blank=True)
     character_tag = models.ManyToManyField(CharacterTag, blank=True)
     organization_tag = models.ManyToManyField(OrganizationTag, blank=True)
@@ -83,10 +86,11 @@ class Profile(models.Model):
     star = models.ManyToManyField(Event, blank=True, related_name="star")
     attend = models.ManyToManyField(Event, blank=True, related_name="attend")
     location = models.CharField("場所", max_length=255, blank=True, default="")
+    is_moderator = models.BooleanField("モデレータフラグ", blank=True, default=False)
     description = models.TextField("詳細", blank=True, default="")
 
     class Meta:
         ordering = ("user",)
 
     def __str__(self):
-        return "%s profile" % self.username
+        return "%s profile" % self.user.username

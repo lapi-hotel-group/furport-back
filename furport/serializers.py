@@ -19,6 +19,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+    is_moderator = serializers.ReadOnlyField()
+
     class Meta:
         model = Profile
         fields = "__all__"
