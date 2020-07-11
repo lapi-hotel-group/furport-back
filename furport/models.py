@@ -1,4 +1,5 @@
 from django.db import models
+from django.dispatch import receiver
 
 
 class GeneralTag(models.Model):
@@ -85,6 +86,7 @@ class Profile(models.Model):
     )
     star = models.ManyToManyField(Event, blank=True, related_name="star")
     attend = models.ManyToManyField(Event, blank=True, related_name="attend")
+    avatar = models.CharField("アバター画像URL", max_length=255, blank=True, default="")
     location = models.CharField("場所", max_length=255, blank=True, default="")
     is_moderator = models.BooleanField("モデレータフラグ", blank=True, default=False)
     description = models.TextField("詳細", blank=True, default="")

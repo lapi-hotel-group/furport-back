@@ -1,7 +1,13 @@
 from django.db import models
 from rest_framework import permissions, renderers, viewsets, mixins
+from rest_framework.views import APIView
 from rest_framework.decorators import action
 from django.contrib.auth.models import User
+from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
+from rest_auth.registration.views import SocialLoginView
+from rest_auth.social_serializers import TwitterLoginSerializer
+from rest_auth.registration.views import SocialConnectView
+from rest_auth.social_serializers import TwitterConnectSerializer
 
 from furport.models import Event, GeneralTag, CharacterTag, OrganizationTag, Profile
 from furport.serializers import (
@@ -13,6 +19,16 @@ from furport.serializers import (
     OrganizationTagSerializer,
 )
 from furport.permissions import IsOwnerOrReadOnly, IsUserOrReadOnly, ReadOnly
+
+
+class TwitterLogin(SocialLoginView):
+    serializer_class = TwitterLoginSerializer
+    adapter_class = TwitterOAuthAdapter
+
+
+class TwitterConnect(SocialConnectView):
+    serializer_class = TwitterConnectSerializer
+    adapter_class = TwitterOAuthAdapter
 
 
 class UserViewSet(
