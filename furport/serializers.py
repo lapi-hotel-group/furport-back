@@ -7,15 +7,7 @@ from furport.models import Event, GeneralTag, OrganizationTag, CharacterTag, Pro
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ("username", "email", "url", "password")
-        extra_kwargs = {"password": {"write_only": True}}
-
-    def create(self, validated_data):
-        user = User(email=validated_data["email"], username=validated_data["username"])
-        user.set_password(validated_data["password"])
-        user.save()
-        Profile.objects.create(user=user)
-        return user
+        fields = ("username", "email", "url")
 
 
 class ProfileSerializer(serializers.ModelSerializer):
