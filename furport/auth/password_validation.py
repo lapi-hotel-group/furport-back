@@ -1,5 +1,3 @@
-from unicodedata import east_asian_width
-
 import re
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
