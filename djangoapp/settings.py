@@ -140,6 +140,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
     ),
 }
+OLD_PASSWORD_FIELD_ENABLED = True
 
 
 JWT_AUTH = {"JWT_EXPIRATION_DELTA": datetime.timedelta(hours=24)}

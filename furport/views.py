@@ -32,10 +32,7 @@ class TwitterConnect(SocialConnectView):
 
 
 class UserViewSet(
-    mixins.CreateModelMixin,
-    mixins.ListModelMixin,
-    mixins.RetrieveModelMixin,
-    viewsets.GenericViewSet,
+    mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet,
 ):
     queryset = User.objects.all().order_by("-date_joined")
     serializer_class = UserSerializer
