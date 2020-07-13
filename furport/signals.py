@@ -10,7 +10,13 @@ from furport.models import Profile
 def socialAccountSaveHandler(sender, instance, created, **kwargs):
     if created:
         profile = Profile.objects.get(user=instance.user)
-        profile.avatar = instance.get_avatar_url()
+
+        import re
+
+        profile.avatar = re.sub(
+            r"^https?://", "https://", instance.get_avatar_url(), count=1
+        )
+
         profile.save(update_fields=["avatar"])
 
 
