@@ -5,3 +5,5 @@ djangorestframework
 djangorestframework-jwt
 django-rest-auth[with_social]
 django-cors-headers
+django-filter
+drf-writable-nested
