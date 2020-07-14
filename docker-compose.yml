@@ -6,7 +6,7 @@ services:
       dockerfile: ./docker/postgres/Dockerfile
     volumes:
       - ./docker/postgres/init:/docker-entrypoint-initdb.d
-      - ./docker/postgres/data:/var/lib/postgresql/data
+      - postgres-volume:/var/lib/postgresql/data:z
     environment:
       POSTGRES_USER: django
       POSTGRES_PASSWORD: password
@@ -24,3 +24,5 @@ services:
     restart: always
     depends_on:
       - postgres
+volumes:
+  postgres-volume:
