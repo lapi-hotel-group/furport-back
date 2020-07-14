@@ -10,12 +10,12 @@ from furport import views
 
 
 router = routers.DefaultRouter()
-router.register(r"events", views.EventViewSet)
+router.register(r"events", views.EventViewSet, basename="event")
 router.register(r"general_tags", views.GeneralTagViewSet)
 router.register(r"character_tags", views.CharacterTagViewSet)
 router.register(r"organization_tags", views.OrganizationTagViewSet)
 router.register(r"users", views.UserViewSet)
-router.register(r"profiles", views.ProfileViewSet)
+router.register(r"profiles", views.ProfileViewSet, basename="profile")
 
 urlpatterns = [
     path("", include(router.urls)),
@@ -33,7 +33,6 @@ urlpatterns = [
         SocialAccountListView.as_view(),
         name="socialaccount_connections",
     ),
-    path("socialaccounts/", ConnectionsView.as_view(), name="social_account_list"),
     re_path(
         r"^socialaccounts/(?P<pk>\d+)/disconnect/$",
         SocialAccountDisconnectView.as_view(),
