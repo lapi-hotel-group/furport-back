@@ -78,6 +78,11 @@ class EventViewSet(viewsets.ModelViewSet):
         character_tag = self.request.query_params.get("character_tag", None)
         organization_tag = self.request.query_params.get("organization_tag", None)
         created_by = self.request.query_params.get("created_by", None)
+        min_start_datetime = self.request.query_params.get("min_start_datetime", None)
+        max_start_datetime = self.request.query_params.get("max_start_datetime", None)
+        min_end_datetime = self.request.query_params.get("min_end_datetime", None)
+        max_end_datetime = self.request.query_params.get("max_end_datetime", None)
+        q_ids = self.request.query_params.get("q_ids", None)
         search = self.request.query_params.get("search", None)
         if general_tag is not None:
             queryset = queryset.filter(general_tag__name__iexact=general_tag)
@@ -87,6 +92,16 @@ class EventViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(organization_tag__name__iexact=organization_tag)
         if created_by is not None:
             queryset = queryset.filter(created_by__username__iexact=created_by)
+        if min_start_datetime is not None:
+            queryset = queryset.filter(start_datetime__gt=min_start_datetime)
+        if max_start_datetime is not None:
+            queryset = queryset.filter(start_datetime__lt=max_start_datetime)
+        if min_end_datetime is not None:
+            queryset = queryset.filter(end_datetime__gt=min_end_datetime)
+        if max_end_datetime is not None:
+            queryset = queryset.filter(end_datetime__lt=max_end_datetime)
+        if q_ids is not None:
+            queryset = queryset.filter(id__in=q_ids.split(","))
         if search is not None:
             queryset = queryset.filter(
                 models.Q(name__icontains=search)
@@ -95,7 +110,6 @@ class EventViewSet(viewsets.ModelViewSet):
                 | models.Q(organization_tag__name__icontains=search)
                 | models.Q(google_map_description__icontains=search)
                 | models.Q(search_keywords__icontains=search)
-                | models.Q(created_by__icontains=search)
             )
         return queryset
 
