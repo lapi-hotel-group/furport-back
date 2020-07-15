@@ -90,6 +90,7 @@ class Profile(models.Model):
         "self", blank=True, related_name="follower", symmetrical=False
     )
     avatar = models.CharField("アバター画像URL", max_length=255, blank=True, default="")
+    twitter_id = models.CharField("TwitterID", max_length=255, blank=True, default="")
     location = models.CharField("場所", max_length=255, blank=True, default="")
     is_moderator = models.BooleanField("モデレータフラグ", blank=True, default=False)
     description = models.TextField("詳細", blank=True, default="")
