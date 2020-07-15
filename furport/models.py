@@ -86,6 +86,9 @@ class Profile(models.Model):
     )
     star = models.ManyToManyField(Event, blank=True, related_name="star")
     attend = models.ManyToManyField(Event, blank=True, related_name="attend")
+    following = models.ManyToManyField(
+        "self", blank=True, related_name="follower", symmetrical=False
+    )
     avatar = models.CharField("アバター画像URL", max_length=255, blank=True, default="")
     location = models.CharField("場所", max_length=255, blank=True, default="")
     is_moderator = models.BooleanField("モデレータフラグ", blank=True, default=False)
