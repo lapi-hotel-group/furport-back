@@ -6,9 +6,11 @@ from furport.models import Event, GeneralTag, OrganizationTag, CharacterTag, Pro
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.ReadOnlyField()
+
     class Meta:
         model = User
-        fields = ("username", "url")
+        fields = ("id", "username", "url")
 
 
 class ProfileSerializer(serializers.ModelSerializer):
