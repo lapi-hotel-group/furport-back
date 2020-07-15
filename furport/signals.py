@@ -16,8 +16,9 @@ def socialAccountSaveHandler(sender, instance, created, **kwargs):
         profile.avatar = re.sub(
             r"^https?://", "https://", instance.get_avatar_url(), count=1
         )
+        profile.twitter_id = instance.get_provider_account()
 
-        profile.save(update_fields=["avatar"])
+        profile.save(update_fields=["avatar", "twitter_id"])
 
 
 @receiver(post_save, sender=User)
