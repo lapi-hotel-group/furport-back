@@ -87,6 +87,7 @@ class EventViewSet(viewsets.ModelViewSet):
         max_end_datetime = self.request.query_params.get("max_end_datetime", None)
         q_ids = self.request.query_params.get("q_ids", None)
         search = self.request.query_params.get("search", None)
+        my_attend = self.request.query_params.get("my_attend", None)
         if general_tag is not None:
             queryset = queryset.filter(general_tag__name__iexact=general_tag)
         if character_tag is not None:
@@ -105,6 +106,8 @@ class EventViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(end_datetime__lt=max_end_datetime)
         if q_ids is not None:
             queryset = queryset.filter(id__in=q_ids.split(","))
+        if my_attend is not None:
+            queryset = queryset.filter(attend__user=self.request.user)
         if search is not None:
             queryset = queryset.filter(
                 models.Q(name__icontains=search)
