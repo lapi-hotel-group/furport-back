@@ -53,10 +53,15 @@ class ProfileViewSet(viewsets.ModelViewSet):
         queryset = Profile.objects.select_related("user").all()
         username = self.request.query_params.get("username", None)
         q_ids = self.request.query_params.get("q_ids", None)
+        my_follow = self.request.query_params.get("my_follow", None)
         if username is not None:
             queryset = queryset.filter(user__username__iexact=username)
         if q_ids is not None:
             queryset = queryset.filter(user__id__in=q_ids.split(","))
+        if my_follow is not None:
+            queryset = queryset.filter(
+                user__id__in=self.request.user.profile.following.all()
+            )
         return queryset
 
 
