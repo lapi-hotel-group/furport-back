@@ -13,21 +13,17 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import datetime
 
+try:
+    from .env import *
+except ImportError:
+    pass
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "flc$6u%7)uc9mt6c*_0u_bzw(olsj@k$ue=1sxc77f3_5)b)9j"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ["localhost", "api.furport.tk"]
-
 
 # Application definition
 
@@ -82,22 +78,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "djangoapp.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "django",
-        "USER": "django",
-        "PASSWORD": "password",
-        "HOST": "postgres",
-        "PORT": 5432,
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -150,9 +130,6 @@ JWT_AUTH = {"JWT_EXPIRATION_DELTA": datetime.timedelta(hours=24)}
 
 SITE_ID = 1
 REST_USE_JWT = True
-
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "tmp/email")
 
 CORS_ORIGIN_WHITELIST = [
     "https://www.furport.tk",
