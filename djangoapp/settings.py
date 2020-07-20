@@ -130,8 +130,3 @@ JWT_AUTH = {"JWT_EXPIRATION_DELTA": datetime.timedelta(hours=24)}
 
 SITE_ID = 1
 REST_USE_JWT = True
-
-CORS_ORIGIN_WHITELIST = [
-    "https://www.furport.tk",
-    "http://localhost:3000",
-]

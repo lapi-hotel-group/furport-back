@@ -1,6 +1,9 @@
 SECRET_KEY = "xxxxx"
 DEBUG = True
 ALLOWED_HOSTS = ["localhost"]
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
