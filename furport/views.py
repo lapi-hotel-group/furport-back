@@ -73,9 +73,7 @@ class EventViewSet(viewsets.ModelViewSet):
         serializer.save(created_by=self.request.user)
 
     def get_queryset(self):
-        queryset = Event.objects.annotate(
-            stars=models.Count("star"), attends=models.Count("attend")
-        )
+        queryset = Event.objects.annotate(stars=models.Count("star")).annotate(attends=models.Count("attend"))
         general_tag = self.request.query_params.get("general_tag", None)
         character_tag = self.request.query_params.get("character_tag", None)
         organization_tag = self.request.query_params.get("organization_tag", None)
