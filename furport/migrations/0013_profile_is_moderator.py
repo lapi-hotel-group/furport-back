@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("furport", "0012_auto_20200711_0659"),
-    ]
+    dependencies = [("furport", "0012_auto_20200711_0659")]
 
     operations = [
         migrations.AddField(
@@ -16,5 +14,5 @@ class Migration(migrations.Migration):
             field=models.BooleanField(
                 blank=True, default=False, verbose_name="モデレータフラグ"
             ),
-        ),
+        )
     ]

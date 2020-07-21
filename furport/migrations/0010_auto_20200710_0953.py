@@ -5,12 +5,10 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("furport", "0009_event_google_map_location"),
-    ]
+    dependencies = [("furport", "0009_event_google_map_location")]
 
     operations = [
-        migrations.RemoveField(model_name="event", name="google_map_location",),
+        migrations.RemoveField(model_name="event", name="google_map_location"),
         migrations.AddField(
             model_name="event",
             name="google_map_description",
