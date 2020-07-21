@@ -119,19 +119,25 @@ class EventViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-class GeneralTagViewSet(viewsets.ModelViewSet):
+class GeneralTagViewSet(
+    mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet
+):
     queryset = GeneralTag.objects.all()
     serializer_class = GeneralTagSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class CharacterTagViewSet(viewsets.ModelViewSet):
+class CharacterTagViewSet(
+    mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet
+):
     queryset = CharacterTag.objects.all()
     serializer_class = CharacterTagSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class OrganizationTagViewSet(viewsets.ModelViewSet):
+class OrganizationTagViewSet(
+    mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet
+):
     queryset = OrganizationTag.objects.all()
     serializer_class = OrganizationTagSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
