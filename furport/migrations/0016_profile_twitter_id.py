@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("furport", "0015_profile_following"),
-    ]
+    dependencies = [("furport", "0015_profile_following")]
 
     operations = [
         migrations.AddField(
@@ -16,5 +14,5 @@ class Migration(migrations.Migration):
             field=models.CharField(
                 blank=True, default="", max_length=255, verbose_name="TwitterID"
             ),
-        ),
+        )
     ]

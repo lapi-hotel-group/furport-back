@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("furport", "0006_auto_20200708_1137"),
-    ]
+    dependencies = [("furport", "0006_auto_20200708_1137")]
 
     operations = [
         migrations.CreateModel(
@@ -33,7 +31,7 @@ class Migration(migrations.Migration):
                     models.TextField(blank=True, default="", verbose_name="詳細"),
                 ),
             ],
-            options={"ordering": ("name",),},
+            options={"ordering": ("name",)},
         ),
         migrations.CreateModel(
             name="GeneralTag",
@@ -58,7 +56,7 @@ class Migration(migrations.Migration):
                     models.TextField(blank=True, default="", verbose_name="詳細"),
                 ),
             ],
-            options={"ordering": ("name",),},
+            options={"ordering": ("name",)},
         ),
         migrations.CreateModel(
             name="OrganizationTag",
@@ -83,11 +81,11 @@ class Migration(migrations.Migration):
                     models.TextField(blank=True, default="", verbose_name="詳細"),
                 ),
             ],
-            options={"ordering": ("name",),},
+            options={"ordering": ("name",)},
         ),
-        migrations.RemoveField(model_name="event", name="tag",),
-        migrations.DeleteModel(name="Tag",),
-        migrations.DeleteModel(name="TagGroup",),
+        migrations.RemoveField(model_name="event", name="tag"),
+        migrations.DeleteModel(name="Tag"),
+        migrations.DeleteModel(name="TagGroup"),
         migrations.AddField(
             model_name="event",
             name="character_tag",

@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(model_name="event", name="stared_by",),
+        migrations.RemoveField(model_name="event", name="stared_by"),
         migrations.CreateModel(
             name="Profile",
             fields=[
@@ -38,6 +38,6 @@ class Migration(migrations.Migration):
                 ),
                 ("star", models.ManyToManyField(blank=True, to="furport.Event")),
             ],
-            options={"ordering": ("user",),},
+            options={"ordering": ("user",)},
         ),
     ]

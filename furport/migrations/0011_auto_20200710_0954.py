@@ -5,14 +5,12 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("furport", "0010_auto_20200710_0953"),
-    ]
+    dependencies = [("furport", "0010_auto_20200710_0953")]
 
     operations = [
         migrations.RenameField(
             model_name="event",
             old_name="google_map_location_id",
             new_name="google_map_place_id",
-        ),
+        )
     ]

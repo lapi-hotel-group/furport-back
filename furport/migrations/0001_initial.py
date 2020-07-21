@@ -9,9 +9,7 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-    ]
+    dependencies = [migrations.swappable_dependency(settings.AUTH_USER_MODEL)]
 
     operations = [
         migrations.CreateModel(
@@ -41,7 +39,7 @@ class Migration(migrations.Migration):
                     models.TextField(blank=True, default="", verbose_name="詳細"),
                 ),
             ],
-            options={"ordering": ("name",),},
+            options={"ordering": ("name",)},
         ),
         migrations.CreateModel(
             name="Event",
@@ -88,6 +86,6 @@ class Migration(migrations.Migration):
                 ),
                 ("tag", models.ManyToManyField(to="furport.Tag")),
             ],
-            options={"ordering": ("start_datetime", "end_datetime"),},
+            options={"ordering": ("start_datetime", "end_datetime")},
         ),
     ]

@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("furport", "0008_auto_20200709_1703"),
-    ]
+    dependencies = [("furport", "0008_auto_20200709_1703")]
 
     operations = [
         migrations.AddField(
@@ -16,5 +14,5 @@ class Migration(migrations.Migration):
             field=models.CharField(
                 blank=True, default="", max_length=255, verbose_name="グーグルマップ位置情報"
             ),
-        ),
+        )
     ]
