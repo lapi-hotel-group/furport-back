@@ -71,19 +71,14 @@ class Event(models.Model):
     )
 
     class Meta:
-        ordering = (
-            "start_datetime",
-            "end_datetime",
-        )
+        ordering = ("start_datetime", "end_datetime")
 
     def __str__(self):
         return self.name
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(
-        "auth.User", on_delete=models.CASCADE, primary_key=True,
-    )
+    user = models.OneToOneField("auth.User", on_delete=models.CASCADE, primary_key=True)
     star = models.ManyToManyField(Event, blank=True, related_name="star")
     attend = models.ManyToManyField(Event, blank=True, related_name="attend")
     following = models.ManyToManyField(

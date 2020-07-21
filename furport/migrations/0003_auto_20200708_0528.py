@@ -43,9 +43,9 @@ class Migration(migrations.Migration):
                     models.TextField(blank=True, default="", verbose_name="詳細"),
                 ),
             ],
-            options={"ordering": ("name",),},
+            options={"ordering": ("name",)},
         ),
-        migrations.RemoveField(model_name="event", name="image_url",),
+        migrations.RemoveField(model_name="event", name="image_url"),
         migrations.AddField(
             model_name="event",
             name="stared_by",

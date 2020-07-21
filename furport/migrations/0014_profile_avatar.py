@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("furport", "0013_profile_is_moderator"),
-    ]
+    dependencies = [("furport", "0013_profile_is_moderator")]
 
     operations = [
         migrations.AddField(
@@ -16,5 +14,5 @@ class Migration(migrations.Migration):
             field=models.CharField(
                 blank=True, default="", max_length=255, verbose_name="アバター画像URL"
             ),
-        ),
+        )
     ]

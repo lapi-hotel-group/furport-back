@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("furport", "0014_profile_avatar"),
-    ]
+    dependencies = [("furport", "0014_profile_avatar")]
 
     operations = [
         migrations.AddField(
@@ -16,5 +14,5 @@ class Migration(migrations.Migration):
             field=models.ManyToManyField(
                 blank=True, related_name="follower", to="furport.Profile"
             ),
-        ),
+        )
     ]

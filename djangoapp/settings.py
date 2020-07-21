@@ -71,9 +71,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-            ],
+            ]
         },
-    },
+    }
 ]
 
 WSGI_APPLICATION = "djangoapp.wsgi.application"
@@ -83,12 +83,12 @@ WSGI_APPLICATION = "djangoapp.wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
-    {"NAME": "furport.auth.password_validation.MultibyteCharacterValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    {"NAME": "furport.auth.password_validation.MultibyteCharacterValidator"},
 ]
 
 
@@ -130,8 +130,3 @@ JWT_AUTH = {"JWT_EXPIRATION_DELTA": datetime.timedelta(hours=24)}
 
 SITE_ID = 1
 REST_USE_JWT = True
-
-CORS_ORIGIN_WHITELIST = [
-    "https://www.furport.tk",
-    "http://localhost:3000",
-]

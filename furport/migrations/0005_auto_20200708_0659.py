@@ -5,9 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("furport", "0004_auto_20200708_0658"),
-    ]
+    dependencies = [("furport", "0004_auto_20200708_0658")]
 
     operations = [
         migrations.AlterField(

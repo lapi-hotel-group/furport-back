@@ -33,7 +33,7 @@ class TwitterConnect(SocialConnectView):
 
 
 class UserViewSet(
-    mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet,
+    mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet
 ):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -44,10 +44,7 @@ class UserViewSet(
 
 class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-        IsUserOrReadOnly,
-    )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly)
 
     def get_queryset(self):
         queryset = Profile.objects.select_related("user").all()
@@ -67,10 +64,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
 
 class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
-    permission_classes = (
-        permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerOrReadOnly,
-    )
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ["start_datetime", "end_datetime", "stars", "attends"]
 
