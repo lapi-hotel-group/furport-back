@@ -7,3 +7,4 @@ django-rest-auth[with_social]
 django-cors-headers
 django-filter
 drf-writable-nested
+drf-yasg

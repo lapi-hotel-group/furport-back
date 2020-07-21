@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.twitter",
     "rest_auth",
     "rest_auth.registration",
+    "drf_yasg",
     "corsheaders",
     "furport",
 ]
