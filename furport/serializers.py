@@ -15,6 +15,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class ProfileSerializer(serializers.ModelSerializer):
     is_moderator = serializers.ReadOnlyField()
+    events_created = serializers.IntegerField(read_only=True)
     user = UserSerializer(read_only=True)
 
     class Meta:
@@ -60,8 +61,8 @@ class OrganizationTagSerializer(serializers.HyperlinkedModelSerializer):
 class EventSerializer(WritableNestedModelSerializer):
     created_by = serializers.ReadOnlyField(source="created_by.username")
     id = serializers.ReadOnlyField()
-    stars = serializers.IntegerField(required=False)
-    attends = serializers.IntegerField(required=False)
+    stars = serializers.IntegerField(read_only=True)
+    attends = serializers.IntegerField(read_only=True)
     attend = EventProfileSerializer(many=True, read_only=True)
     general_tag = GeneralTagSerializer(many=True)
     character_tag = CharacterTagSerializer(many=True)
