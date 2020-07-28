@@ -47,7 +47,9 @@ class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly)
 
     def get_queryset(self):
-        queryset = Profile.objects.select_related("user").all()
+        queryset = Profile.objects.select_related("user").annotate(
+            events_created=models.Count("user__created_by")
+        )
         username = self.request.query_params.get("username", None)
         q_ids = self.request.query_params.get("q_ids", None)
         my_follow = self.request.query_params.get("my_follow", None)
