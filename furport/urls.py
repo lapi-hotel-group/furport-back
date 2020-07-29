@@ -1,10 +1,9 @@
 from django.urls import include, path, re_path
 from rest_framework import routers, permissions
-from rest_auth.registration.views import (
+from dj_rest_auth.registration.views import (
     SocialAccountListView,
     SocialAccountDisconnectView,
 )
-from allauth.socialaccount.views import ConnectionsView
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
@@ -34,23 +33,23 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("rest-auth/", include("rest_auth.urls")),
-    path("rest-auth/registration/", include("rest_auth.registration.urls")),
-    path("rest-auth/twitter/", views.TwitterLogin.as_view(), name="twitter_login"),
+    path("dj-rest-auth/", include("dj_rest_auth.urls")),
+    path("dj-rest-auth/registration/", include("dj_rest_auth.registration.urls")),
+    path("dj-rest-auth/twitter/", views.TwitterLogin.as_view(), name="twitter_login"),
     path(
-        "rest-auth/twitter/connect/",
+        "dj-rest-auth/twitter/connect/",
         views.TwitterConnect.as_view(),
         name="twitter_connect",
     ),
     path(
-        "accounts/social/connections/",
+        "socialaccounts/",
         SocialAccountListView.as_view(),
         name="socialaccount_connections",
     ),
-    re_path(
-        r"^socialaccounts/(?P<pk>\d+)/disconnect/$",
+    path(
+        "socialaccounts/<int:pk>/disconnect/",
         SocialAccountDisconnectView.as_view(),
-        name="social_account_disconnect",
+        name="socialaccount_disconnect",
     ),
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
