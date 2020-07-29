@@ -4,10 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
-from rest_auth.registration.views import SocialLoginView
-from rest_auth.social_serializers import TwitterLoginSerializer
-from rest_auth.registration.views import SocialConnectView
-from rest_auth.social_serializers import TwitterConnectSerializer
+from dj_rest_auth.registration.views import SocialLoginView
+from dj_rest_auth.social_serializers import TwitterLoginSerializer
+from dj_rest_auth.registration.views import SocialConnectView
+from dj_rest_auth.social_serializers import TwitterConnectSerializer
 
 from django.contrib.auth.models import User
 from furport.models import Event, GeneralTag, CharacterTag, OrganizationTag, Profile

@@ -37,12 +37,13 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django_filters",
     "rest_framework",
+    "rest_framework.authtoken",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.twitter",
-    "rest_auth",
-    "rest_auth.registration",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
     "drf_yasg",
     "corsheaders",
     "furport",
@@ -118,7 +119,7 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10000,
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
     ),
@@ -127,7 +128,9 @@ REST_FRAMEWORK = {
 OLD_PASSWORD_FIELD_ENABLED = True
 
 
-JWT_AUTH = {"JWT_EXPIRATION_DELTA": datetime.timedelta(hours=24)}
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(hours=24),
+}
 
 SITE_ID = 1
 REST_USE_JWT = True
