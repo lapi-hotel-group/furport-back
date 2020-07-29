@@ -42,12 +42,14 @@ urlpatterns = [
         name="twitter_connect",
     ),
     path(
-        "socialaccounts/", SocialAccountListView.as_view(), name="social_account_list"
+        "socialaccounts/",
+        SocialAccountListView.as_view(),
+        name="socialaccount_connections",
     ),
     path(
         "socialaccounts/<int:pk>/disconnect/",
         SocialAccountDisconnectView.as_view(),
-        name="social_account_disconnect",
+        name="socialaccount_disconnect",
     ),
     re_path(
         r"^swagger(?P<format>\.json|\.yaml)$",
