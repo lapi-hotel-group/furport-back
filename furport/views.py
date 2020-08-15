@@ -85,20 +85,10 @@ class EventViewSet(viewsets.ModelViewSet):
             tz = pytz.timezone("Asia/Tokyo")
         same_events = Event.objects.filter(
             start_datetime__range=[
-                pytz.timezone("UTC")
-                .localize(
-                    dateutil.parser.parse(
-                        self.request.data["start_datetime"].replace("Z", "")
-                    )
-                )
+                dateutil.parser.parse(self.request.data["start_datetime"])
                 .astimezone(tz)
                 .replace(hour=0, minute=0, second=0, microsecond=0),
-                pytz.timezone("UTC")
-                .localize(
-                    dateutil.parser.parse(
-                        self.request.data["start_datetime"].replace("Z", "")
-                    )
-                )
+                dateutil.parser.parse(self.request.data["start_datetime"])
                 .astimezone(tz)
                 .replace(hour=23, minute=59, second=59, microsecond=999),
             ]
