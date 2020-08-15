@@ -47,6 +47,10 @@ class Event(models.Model):
     name = models.CharField("イベント名", max_length=255, blank=False, default="")
     start_datetime = models.DateTimeField("開始時刻")
     end_datetime = models.DateTimeField("終了時刻")
+    timezone = models.CharField(
+        "IANAタイムゾーン名", max_length=255, blank=True, default="Asia/Tokyo"
+    )
+    no_time = models.BooleanField("時間未定フラグ", blank=True, default=False)
     url = models.CharField("URL", max_length=255, blank=True, default="")
     twitter_id = models.CharField("TwitterId", max_length=255, blank=True, default="")
     description = models.TextField("詳細", blank=True, default="")
