@@ -1,7 +1,8 @@
 from django.db import models
-from rest_framework import permissions, renderers, viewsets, mixins, filters
+from rest_framework import permissions, renderers, viewsets, mixins, filters, status
 from rest_framework.views import APIView
 from rest_framework.decorators import action
+from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
 from dj_rest_auth.registration.views import SocialLoginView
@@ -70,7 +71,35 @@ class EventViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ["start_datetime", "end_datetime", "stars", "attends"]
 
-    @action(detail=False, methods=["post"])
+    def create(self, request, *args, **kwargs):
+        try:
+            create_same_day_event = self.request.data["create_same_day_event"]
+        except KeyError:
+            create_same_day_event = None
+        print(create_same_day_event)
+        if (
+            create_same_day_event is None
+            and Event.objects.filter(
+                start_datetime__startswith=self.request.data["start_datetime"].split(
+                    "T"
+                )[0]
+            ).exists()
+        ):
+            return Response(
+                {
+                    "message": "Same day event",
+                    "detail": "Same day event is found. Please set create_same_day_event key in body if you want to add this event.",
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(
+            serializer.data, status=status.HTTP_201_CREATED, headers=headers
+        )
+
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
 
