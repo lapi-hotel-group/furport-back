@@ -8,3 +8,4 @@ drf-writable-nested
 drf-yasg
 dj-rest-auth[with_social]
 djangorestframework-simplejwt
+python-dateutil

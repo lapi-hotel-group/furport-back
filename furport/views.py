@@ -1,3 +1,6 @@
+import datetime
+import pytz
+import dateutil.parser
 from django.db import models
 from rest_framework import permissions, renderers, viewsets, mixins, filters, status
 from rest_framework.views import APIView
@@ -76,8 +79,29 @@ class EventViewSet(viewsets.ModelViewSet):
             create_same_day_event = self.request.data["create_same_day_event"]
         except KeyError:
             create_same_day_event = None
+        try:
+            tz = pytz.timezone(self.request.data["timezone"])
+        except KeyError:
+            tz = pytz.timezone("Asia/Tokyo")
         same_events = Event.objects.filter(
-            start_datetime__startswith=self.request.data["start_datetime"].split("T")[0]
+            start_datetime__range=[
+                pytz.timezone("UTC")
+                .localize(
+                    dateutil.parser.parse(
+                        self.request.data["start_datetime"].replace("Z", "")
+                    )
+                )
+                .astimezone(tz)
+                .replace(hour=0, minute=0, second=0, microsecond=0),
+                pytz.timezone("UTC")
+                .localize(
+                    dateutil.parser.parse(
+                        self.request.data["start_datetime"].replace("Z", "")
+                    )
+                )
+                .astimezone(tz)
+                .replace(hour=23, minute=59, second=59, microsecond=999),
+            ]
         )
         if create_same_day_event is None and same_events.exists():
             return Response(
