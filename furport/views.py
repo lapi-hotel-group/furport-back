@@ -76,19 +76,15 @@ class EventViewSet(viewsets.ModelViewSet):
             create_same_day_event = self.request.data["create_same_day_event"]
         except KeyError:
             create_same_day_event = None
-        print(create_same_day_event)
-        if (
-            create_same_day_event is None
-            and Event.objects.filter(
-                start_datetime__startswith=self.request.data["start_datetime"].split(
-                    "T"
-                )[0]
-            ).exists()
-        ):
+        same_events = Event.objects.filter(
+            start_datetime__startswith=self.request.data["start_datetime"].split("T")[0]
+        )
+        if create_same_day_event is None and same_events.exists():
             return Response(
                 {
                     "message": "Same day event",
                     "detail": "Same day event is found. Please set create_same_day_event key in body if you want to add this event.",
+                    "events_name": same_events.values_list("name", flat=True),
                 },
                 status=status.HTTP_400_BAD_REQUEST,
             )
