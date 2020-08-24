@@ -16,7 +16,7 @@ import dj_database_url
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["api.furport.tk", ".herokuapp.com"]
+ALLOWED_HOSTS = ["api.furport.tk", "api-stg.furport.tk", ".herokuapp.com"]
 CORS_ORIGIN_WHITELIST = [
     "https://www.furport.tk",
     "https://develop.furport.tk",
