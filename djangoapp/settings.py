@@ -12,6 +12,20 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import datetime
+import dj_database_url
+
+DEBUG = False
+
+ALLOWED_HOSTS = ["api.furport.tk", ".herokuapp.com"]
+CORS_ORIGIN_WHITELIST = [
+    "https://www.furport.tk",
+    "https://develop.furport.tk",
+]
+
+
+DATABASES = {
+    "default": dj_database_url.config(),
+}
 
 try:
     from .env import *
@@ -136,3 +150,6 @@ SITE_ID = 1
 REST_USE_JWT = True
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+if not DEBUG:
+    SECRET_KEY = os.environ["SECRET_KEY"]

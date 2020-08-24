@@ -9,3 +9,4 @@ drf-yasg
 dj-rest-auth[with_social]
 djangorestframework-simplejwt
 python-dateutil
+dj_database_url
