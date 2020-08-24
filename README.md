@@ -14,7 +14,7 @@
 最初に、Linter をインストールして pre-commit を設定します。
 
 ```
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 pre-commit install
 ```
 

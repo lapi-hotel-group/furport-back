@@ -1,5 +1,5 @@
 Django
-psycopg2
+psycopg2-binary
 uwsgi
 djangorestframework
 django-cors-headers
@@ -9,3 +9,6 @@ drf-yasg
 dj-rest-auth[with_social]
 djangorestframework-simplejwt
 python-dateutil
+dj_database_url
+gunicorn
+whitenoise
