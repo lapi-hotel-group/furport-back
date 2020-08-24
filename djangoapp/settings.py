@@ -27,20 +27,13 @@ DATABASES = {
     "default": dj_database_url.config(),
 }
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATIC_URL = "/static/"
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-
 try:
     from .env import *
 except ImportError:
     pass
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -79,6 +72,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "djangoapp.urls"
@@ -154,6 +148,8 @@ SITE_ID = 1
 REST_USE_JWT = True
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 if not DEBUG:
     SECRET_KEY = os.environ["SECRET_KEY"]

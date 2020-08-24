@@ -11,3 +11,4 @@ djangorestframework-simplejwt
 python-dateutil
 dj_database_url
 gunicorn
+whitenoise
