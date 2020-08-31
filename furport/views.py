@@ -51,8 +51,12 @@ class ProfileViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsUserOrReadOnly)
 
     def get_queryset(self):
-        queryset = Profile.objects.select_related("user").annotate(
-            events_created=models.Count("user__created_by")
+        queryset = (
+            Profile.objects.select_related("user")
+            .prefetch_related("star")
+            .prefetch_related("attend")
+            .prefetch_related("following")
+            .annotate(events_created=models.Count("user__created_by"))
         )
         username = self.request.query_params.get("username", None)
         q_ids = self.request.query_params.get("q_ids", None)
@@ -114,9 +118,15 @@ class EventViewSet(viewsets.ModelViewSet):
         serializer.save(created_by=self.request.user)
 
     def get_queryset(self):
-        queryset = Event.objects.annotate(
-            stars=models.Count("star", distinct=True)
-        ).annotate(attends=models.Count("attend", distinct=True))
+        queryset = (
+            Event.objects.prefetch_related("attend", "attend__user")
+            .prefetch_related("general_tag")
+            .prefetch_related("character_tag")
+            .prefetch_related("organization_tag")
+            .prefetch_related("created_by")
+            .annotate(stars=models.Count("star", distinct=True))
+            .annotate(attends=models.Count("attend", distinct=True))
+        )
         general_tag = self.request.query_params.get("general_tag", None)
         character_tag = self.request.query_params.get("character_tag", None)
         organization_tag = self.request.query_params.get("organization_tag", None)
