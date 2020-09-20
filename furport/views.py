@@ -2,6 +2,8 @@ import datetime
 import pytz
 import dateutil.parser
 from django.db import models
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import permissions, renderers, viewsets, mixins, filters, status
 from rest_framework.views import APIView
 from rest_framework.decorators import action
@@ -77,6 +79,18 @@ class EventViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ["start_datetime", "end_datetime", "stars", "attends"]
+
+    @method_decorator(cache_page(60 * 5))
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
     def create(self, request, *args, **kwargs):
         try:
