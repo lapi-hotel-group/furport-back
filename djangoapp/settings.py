@@ -142,6 +142,8 @@ OLD_PASSWORD_FIELD_ENABLED = True
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": datetime.timedelta(hours=24),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=180),
+    "ROTATE_REFRESH_TOKENS": True,
 }
 
 SITE_ID = 1
