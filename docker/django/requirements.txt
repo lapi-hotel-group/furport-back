@@ -12,4 +12,5 @@ python-dateutil
 dj_database_url
 gunicorn
 whitenoise
+django-redis
 django-debug-toolbar
